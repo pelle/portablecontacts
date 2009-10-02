@@ -1,6 +1,36 @@
-= portablecontacts
+= Portable Contacts
 
-Description goes here.
+This is a ruby client implementation of Portable Contacts a standard for exchanging profile and address book data.
+
+The current draft of the standard is http://portablecontacts.net/draft-spec.html
+
+Portable Contacts is currently supported by Plaxo, Google, Yahoo, and most OpenSocial containers.
+
+This client uses OAuth and JSON exclusively. There are no plans for supporting basic authentication or xml.
+
+To use it you need an OAuth AccessToken (see http://oauth.rubyforge.org/). If you are using Rails, you may find the easiest way of doing this as using the OAuth Plugin http://stakeventures.com/articles/2009/07/21/consuming-oauth-intelligently-in-rails
+
+The Gem requires:
+
+* ActiveSupport
+* OAuth Gem
+* JSON gem
+
+== Example Code
+
+  @access_token = ... # instantiate access token
+  
+  @client = PortableContacts::Client.new "http://www-opensocial.googleusercontent.com/api/people", @access_token
+  
+  # Get users profile
+  
+  @profile = @client.me
+  
+  puts @profile.display_name
+  => "Bob Sample"
+  
+  # Get users contacts
+  @contacts = @client.all
 
 == Note on Patches/Pull Requests
  
